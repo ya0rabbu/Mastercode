@@ -4,7 +4,7 @@ import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 const cabinet = localFont({
-  src: "../../public/fonts/CabinetGrotesk-Extrabold.otf",
+  src: "../public/fonts/CabinetGrotesk-Extrabold.otf",
   variable: "--font-cabinet",
   weight: "800",
 });

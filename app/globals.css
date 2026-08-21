@@ -1,26 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Brand design tokens.
+   Tailwind v4 reads theme values from CSS here — NOT from tailwind.config.ts,
+   which v4 ignores unless explicitly loaded with `@config`. Each token below
+   generates utilities, e.g. --color-brand-primary-active -> text/bg/border-brand-primary-active. */
+@theme {
+  --color-brand-primary-active: #380610;
+  --color-brand-accent-default: #7a1020;
+  --color-text-secondary: #4a2e28;
+  --color-border-strong: #b89088;
+  --color-background-default: #faf4f0;
 }
 
+/* Fonts are provided by next/font in app/layout.tsx, which sets --font-manrope
+   and --font-cabinet on <html>. `inline` stops Tailwind from re-declaring these
+   vars so the next/font values win at runtime. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-cabinet: var(--font-cabinet);
+  --font-manrope: var(--font-manrope);
+  --font-sans: var(--font-manrope);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  background-color: var(--color-background-default);
+  color: var(--color-brand-primary-active);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
