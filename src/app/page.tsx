@@ -1,13 +1,15 @@
-import Header from "@src/components/Header";
-import Hero from "@src/components/Hero";
-import IntroSection from "@src/components/IntroSection";
+import Header from "@/components/layout/Header";
+import HeroSection from "@/components/sections/hero/HeroSection";
+import AboutSection from "@/components/sections/about/AboutSection";
+import ServicesSection from "@/components/sections/services/ServicesSection";
 
-export default function Home() {
+export default function Page() {
   return (
     <main>
       <Header />
-      <Hero />
-      <IntroSection />
+      <HeroSection />
+      <AboutSection />
+      <ServicesSection />
     </main>
   );
 }
