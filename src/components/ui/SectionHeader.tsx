@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import { cn } from "@/lib/utils";
 
 type Surface = "light" | "dark";
@@ -35,6 +36,7 @@ type SectionHeaderProps = {
   className?: string;
 };
 
+/** Title and subtitle blur in one after the other, like Julian's heading-block. */
 export default function SectionHeader({
   title,
   subtitle,
@@ -47,22 +49,37 @@ export default function SectionHeader({
   const palette = surfaces[surface];
 
   return (
-    <div
+    <Reveal
+      blur={10}
+      y={24}
+      stagger={0.14}
+      target="> *"
       className={cn(
-        "flex w-full flex-col gap-4",
+        "flex flex-col gap-4",
         align === "center" ? "items-center text-center" : "items-start",
         className
       )}
     >
-      <h2 className={cn("font-display font-bold capitalize", sizes[size], palette.title)}>
+      <h2
+        className={cn(
+          "font-display font-bold capitalize",
+          sizes[size],
+          palette.title
+        )}
+      >
         {title}
       </h2>
-
       {subtitle && (
-        <p className={cn("font-body text-body-sm", palette.body, widths[subtitleWidth])}>
+        <p
+          className={cn(
+            "font-body text-body-sm",
+            palette.body,
+            widths[subtitleWidth]
+          )}
+        >
           {subtitle}
         </p>
       )}
-    </div>
+    </Reveal>
   );
 }

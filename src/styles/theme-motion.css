@@ -1,0 +1,10 @@
+/* Tailwind v4 motion tokens.
+   --ease-spring reproduces Figma's Smart Animate spring
+   (mass 1, stiffness 100, damping 15 => omega0 = 10rad/s, zeta = 0.75)
+   sampled every 50ms across its ~1022ms settle. Pair with duration-1000. */
+@theme {
+  --ease-spring: linear(
+    0, 0.097, 0.298, 0.514, 0.7, 0.839, 0.933, 0.989, 1.017, 1.028, 1.028,
+    1.023, 1.017, 1.011, 1.006, 1.003, 1.001, 1, 0.999, 0.999, 1
+  );
+}

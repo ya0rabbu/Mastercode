@@ -1,0 +1,25 @@
+export const cta = {
+  title: "Have a Project in mind?",
+  subtitle:
+    "Good products start with a conversation. If you've got one in mind, Yasir's ready to help shape it.",
+  action: { label: "Start a Project", href: "mailto:hello@yasirabedrabbu.com" },
+  avatar: { src: "/images/cta-avatar.png", alt: "Yasir Abed Rabbu" },
+};
+
+export type SocialLink = { name: string; href: string; icon: string };
+
+/** Figma order + Figma's own spelling of the hover labels. */
+export const socialLinks: SocialLink[] = [
+  { name: "Linkedin", href: "https://www.linkedin.com/", icon: "/icons/social-linkedin.svg" },
+  { name: "Dribbble", href: "https://dribbble.com/", icon: "/icons/social-dribbble.svg" },
+  { name: "Behance", href: "https://www.behance.net/", icon: "/icons/social-behance.svg" },
+  { name: "X", href: "https://x.com/", icon: "/icons/social-x.svg" },
+];
+
+export const footer = {
+  copyright: "© 2026 Yasir Abed Rabbu · All rights reserved.",
+  links: [
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Use", href: "#" },
+  ],
+};

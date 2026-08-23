@@ -2,6 +2,7 @@ import Section from "@/components/ui/Section";
 import RichHeading from "@/components/ui/RichHeading";
 import Prose from "@/components/ui/Prose";
 import Button from "@/components/ui/Button";
+import RuledAction from "@/components/ui/RuledAction";
 import { about, aboutHeadline } from "@/data/about";
 
 export default function AboutSection() {
@@ -13,6 +14,7 @@ export default function AboutSection() {
         surface="dark"
         size="text-[28px] leading-[1.14] sm:text-[44px] lg:text-h1"
         weight={500}
+        capitalize
         className="max-w-[1058px] text-center"
       />
 
@@ -20,9 +22,11 @@ export default function AboutSection() {
         {about.body}
       </Prose>
 
-      <Button href={about.cta.href} variant="light">
-        {about.cta.label}
-      </Button>
+      <RuledAction tone="dark">
+        <Button href={about.cta.href} variant="light">
+          {about.cta.label}
+        </Button>
+      </RuledAction>
     </Section>
   );
 }
