@@ -39,8 +39,8 @@ export default function Button({
   const { pill, ring } = variants[variant];
 
   const face = cn(
-    "relative z-10 inline-flex h-control items-center justify-center gap-8px",
-    "rounded-pill px-8 font-ui text-label font-medium lg:px-10",
+    "relative z-10 inline-flex h-[48px] items-center justify-center gap-1",
+    "rounded-pill px-5 font-ui text-[14px] font-medium sm:h-control sm:px-8 sm:text-label lg:px-10 lg:gap-2",
     pill
   );
 
@@ -52,7 +52,7 @@ export default function Button({
   );
 
   return (
-    <span className={cn("group relative inline-flex h-control", className)}>
+    <span className={cn("group relative inline-flex h-[48px] sm:h-control", className)}>
       <GhostRing tone={ring} />
       {href ? (
         <Link href={href} className={face}>

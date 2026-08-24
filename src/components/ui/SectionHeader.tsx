@@ -11,10 +11,10 @@ const surfaces: Record<Surface, { title: string; body: string }> = {
 
 /** Full literal strings so Tailwind's scanner can see every class. */
 const sizes: Record<Size, string> = {
-  hero: "text-[40px] leading-[1.05] sm:text-[64px] lg:text-hero",
-  h1: "text-[36px] leading-[1.14] sm:text-[48px] lg:text-h1",
-  h1Tight: "text-[36px] leading-[1.05] sm:text-[48px] lg:text-h1-tight",
-  h2: "text-[28px] leading-[1.14] sm:text-[34px] lg:text-h2",
+  hero: "text-[32px] leading-[1.05] sm:text-[40px] md:text-[56px] lg:text-hero",
+  h1: "text-[28px] leading-[1.18] sm:text-[36px] md:text-[44px] lg:text-h1",
+  h1Tight: "text-[28px] leading-[1.08] sm:text-[36px] md:text-[48px] lg:text-h1-tight",
+  h2: "text-[22px] leading-[1.18] sm:text-[28px] md:text-[32px] lg:text-h2",
 };
 
 const widths = {
@@ -72,7 +72,7 @@ export default function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            "font-body text-body-sm",
+            "font-body text-[14px] leading-[1.5] sm:text-body-sm",
             palette.body,
             widths[subtitleWidth]
           )}

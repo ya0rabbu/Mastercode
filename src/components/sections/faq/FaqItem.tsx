@@ -53,16 +53,16 @@ export default function FaqItem({ faq, open, onToggle }: FaqItemProps) {
   );
 
   return (
-    <div className="flex w-full flex-col border-b border-hair-dark pb-6 pt-4">
+    <div className="flex w-full flex-col border-b border-hair-dark pb-5 pt-4 sm:pb-6">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-6 text-left"
+        className="flex w-full items-center justify-between gap-4 sm:gap-6 text-left"
       >
         <span
           className={cn(
-            "font-display text-[20px] leading-tight text-ink transition-colors duration-300 sm:text-[24px] lg:text-h4",
+            "font-display text-[17px] leading-tight text-ink transition-colors duration-300 sm:text-[20px] md:text-[24px] lg:text-h4",
             open ? "font-bold" : "font-medium"
           )}
         >
@@ -73,7 +73,7 @@ export default function FaqItem({ faq, open, onToggle }: FaqItemProps) {
 
       <div ref={bodyRef} className="h-0 overflow-hidden">
         <div ref={innerRef}>
-          <Prose size="base" className="pt-4 font-medium">
+          <Prose size="base" className="pt-3 sm:pt-4 font-medium">
             {faq.answer}
           </Prose>
         </div>

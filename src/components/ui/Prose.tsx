@@ -13,11 +13,11 @@ const tones: Record<Tone, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  lg: "text-body-lg",
-  base: "text-body",
-  sm: "text-body-sm",
-  note: "text-note",
-  caption: "text-caption",
+  lg: "text-[18px] leading-[1.55] sm:text-body-lg",
+  base: "text-[15px] leading-[1.6] sm:text-body",
+  sm: "text-[14px] leading-[1.55] sm:text-body-sm",
+  note: "text-[13px] leading-[1.5] sm:text-note",
+  caption: "text-[13px] leading-[1.45] sm:text-caption",
 };
 
 /** Figma caps body copy at these four widths depending on the section. */

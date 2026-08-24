@@ -10,7 +10,7 @@ export default function FaqList() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <div className="flex w-full flex-1 flex-col rounded-frame bg-bg-white px-6 py-4 lg:px-10 lg:py-6">
+    <div className="flex w-full flex-1 flex-col rounded-frame bg-bg-white px-5 py-4 sm:px-6 lg:px-10 lg:py-6">
       {faqs.map((faq, index) => (
         <FaqItem
           key={faq.question}

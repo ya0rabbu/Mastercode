@@ -10,10 +10,9 @@ type ServiceMockupProps = {
 /** Figma StyledMockup: a 648×432 dark showcase card + a description panel. */
 export default function ServiceMockup({ service }: ServiceMockupProps) {
   return (
-    <div className="flex flex-1 flex-col gap-5 self-stretch">
+    <div className="flex flex-1 flex-col gap-4 self-stretch sm:gap-5">
       <div className="relative aspect-[648/432] w-full overflow-hidden rounded-card">
         <ServiceMockupBackdrop />
-        {/* StyledReplacethis: the product shot, ~68% wide, centred and clipped. */}
         <div className="absolute left-[17.5%] top-[13.1%] h-[87.9%] w-[67.6%]">
           <Image
             key={service.mockup}
@@ -26,8 +25,7 @@ export default function ServiceMockup({ service }: ServiceMockupProps) {
         </div>
       </div>
 
-      {/* StyledServiceDescription: 18px Manrope, top-aligned, cream + hairline. */}
-      <div className="flex flex-1 items-start rounded-card bg-bg p-4 outline outline-1 outline-line">
+      <div className="flex flex-1 items-start rounded-card bg-bg p-4 sm:p-5 outline outline-1 outline-line">
         <Prose size="base" tone="soft">
           {service.description}
         </Prose>

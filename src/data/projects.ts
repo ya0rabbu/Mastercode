@@ -24,7 +24,7 @@ export const featuredProject: FeaturedProject = {
     "The brief was simple: stop looking like every other \u201Cwe detect " +
     "threats\u201D SaaS site. Stop selling fear. Start selling decisive action.",
   image: "/images/project-hexon-hero.png",
-  href: "#",
+  href: "https://dribbble.com/shots/27412079-HEXON-Cybersecurity-SaaS-Landing-Page",
 };
 
 export const projects: Project[] = [
@@ -32,20 +32,20 @@ export const projects: Project[] = [
     slug: "hexon",
     title: "HEXON",
     image: "/images/project-hexon.png",
-    href: "#",
+    href: "https://dribbble.com/shots/27412079-HEXON-Cybersecurity-SaaS-Landing-Page",
   },
   {
     slug: "void-studio",
     title: "VOID/STUDIO",
     image: "/images/project-void-studio.png",
-    href: "#",
+    href: "https://dribbble.com/shots/27359253-VOID-STUDIO-Dark-Agency-Landing-Page-UI",
   },
   {
     slug: "alpinevista",
     title: "AlpineVista",
     image: "/images/project-alpinevista.jpg",
-    href: "#",
+    href: "https://dribbble.com/shots/26802463-AlpineVista-Ski-Resort-Winter-Vacation-Website",
   },
 ];
 
-export const projectsCta = { label: "View more projects", href: "#" };
+export const projectsCta = { label: "View more projects", href: "https://dribbble.com/yasirabedrabbu" };

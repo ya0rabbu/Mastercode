@@ -1,20 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import * as THREE from "three";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { createLiquidMaterial } from "@/lib/liquidShader";
 
-/**
- * Ripples `src` around the pointer on a WebGL quad. Attach `containerRef` to the
- * frame (sizing + pointer events) and `canvasRef` to the <canvas>; `ready` flips
- * true after the first paint so the caller can hide its fallback <img>. Bails —
- * leaving the fallback — on touch, reduced-motion, or a missing WebGL context.
- */
 export function useLiquidHover(src: string) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [ready, setReady] = useState(false);
 
   useGSAP(
     () => {
@@ -28,7 +21,7 @@ export function useLiquidHover(src: string) {
       try {
         renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
       } catch {
-        return; // no WebGL — keep the fallback image
+        return; // no WebGL — the base <img> stays
       }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -37,6 +30,7 @@ export function useLiquidHover(src: string) {
       const { material, uniforms } = createLiquidMaterial();
       scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
 
+      let loaded = false;
       const target = new THREE.Vector2(0.5, 0.5);
       const resize = () => {
         const w = container.clientWidth || 1;
@@ -49,31 +43,35 @@ export function useLiquidHover(src: string) {
         uniforms.uMouse.value.lerp(target, 0.12);
         renderer.render(scene, camera);
       };
-      const resizeAndRender = () => {
-        resize();
-        render();
-      };
 
       new THREE.TextureLoader().load(src, (tex) => {
         tex.colorSpace = THREE.SRGBColorSpace;
         tex.minFilter = THREE.LinearFilter;
         uniforms.uTexture.value = tex;
         uniforms.uImageResolution.value.set(tex.image.width, tex.image.height);
-        resizeAndRender();
-        setReady(true);
+        loaded = true;
+        resize();
+        render();
       });
 
       const enter = () => {
-        gsap.to(uniforms.uHover, { value: 1, duration: 0.6, ease: "power2.out" });
+        if (!loaded) return; // never flash a black (textureless) canvas
+        resize();
+        render();
         gsap.ticker.add(render);
+        gsap.to(canvas, { opacity: 1, duration: 0.3, overwrite: true });
+        gsap.to(uniforms.uHover, { value: 1, duration: 0.6, ease: "power2.out", overwrite: true });
       };
-      const leave = () =>
-        gsap.to(uniforms.uHover, {
-          value: 0,
-          duration: 0.9,
-          ease: "power2.out",
+      const leave = () => {
+        gsap.to(uniforms.uHover, { value: 0, duration: 0.7, ease: "power2.out", overwrite: true });
+        gsap.to(canvas, {
+          opacity: 0,
+          duration: 0.5,
+          delay: 0.45,
+          overwrite: true,
           onComplete: () => gsap.ticker.remove(render),
         });
+      };
       const move = (e: PointerEvent) => {
         const b = container.getBoundingClientRect();
         target.set((e.clientX - b.left) / b.width, 1 - (e.clientY - b.top) / b.height);
@@ -82,7 +80,7 @@ export function useLiquidHover(src: string) {
       container.addEventListener("pointerenter", enter);
       container.addEventListener("pointerleave", leave);
       container.addEventListener("pointermove", move);
-      const ro = new ResizeObserver(resizeAndRender);
+      const ro = new ResizeObserver(resize);
       ro.observe(container);
 
       return () => {
@@ -99,5 +97,5 @@ export function useLiquidHover(src: string) {
     { scope: containerRef, dependencies: [src] }
   );
 
-  return { containerRef, canvasRef, ready };
+  return { containerRef, canvasRef };
 }

@@ -17,7 +17,7 @@ export default function ResultsSection() {
         subtitleWidth="md"
         className="max-w-[780px]"
       />
-<div className="flex w-full flex-col items-start gap-8">
+<div className="flex w-full flex-col items-start gap-6 md:gap-8">
         <Reveal target="> *" stagger={0.12}>
           <Testimonial />
         </Reveal>

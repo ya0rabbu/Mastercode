@@ -29,12 +29,12 @@ export default function StatBlock({
       className={cn(
         "flex flex-1 flex-col",
         isProcess
-          ? "justify-between gap-8 px-6 pb-4 pt-6 lg:h-stat-card"
-          : "gap-4 p-6 lg:p-8",
+          ? "justify-between gap-6 px-5 pb-4 pt-5 sm:px-6 sm:gap-8 sm:pt-6 lg:h-stat-card"
+          : "gap-4 p-5 sm:p-6 lg:p-8",
         divider &&
           (isProcess
-            ? "lg:border-l lg:border-line-strong"
-            : "lg:border-l lg:border-hair-warm"),
+            ? "border-t border-line-strong lg:border-l lg:border-t-0"
+            : "border-t border-hair-warm lg:border-l lg:border-t-0"),
         className
       )}
     >
@@ -53,9 +53,9 @@ export default function StatBlock({
         <CountUp
           value={value}
           className={cn(
-            "font-body text-[48px] leading-none sm:text-[64px] lg:text-stat",
+            "font-body text-[40px] leading-none sm:text-[48px] md:text-[64px] lg:text-stat",
             isProcess
-              ? "font-bold tracking-[4px] text-brand-hover"
+              ? "font-bold tracking-[2px] sm:tracking-[4px] text-brand-hover"
               : "font-semibold text-on-cta"
           )}
         />
@@ -66,7 +66,7 @@ export default function StatBlock({
       </div>
 
       {!isProcess && (
-        <p className="font-body text-h5 text-ink-faint">{description}</p>
+        <p className="font-body text-[18px] sm:text-h5 text-ink-faint">{description}</p>
       )}
     </div>
   );

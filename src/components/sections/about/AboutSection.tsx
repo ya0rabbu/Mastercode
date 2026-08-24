@@ -14,17 +14,17 @@ export default function AboutSection() {
       tone="deep"
       gap="block"
       space="none"
-      className="py-16 md:py-24 lg:pt-[50px] lg:pb-[100px]"
+      className="py-12 md:py-20 lg:pt-[50px] lg:pb-[100px]"
     >
       <Stack gap="md">
-        <ScaleRule axis="y" tone="bg-hair-light" className="h-[120px] lg:h-[200px]" />
+        <ScaleRule axis="y" tone="bg-hair-light" className="h-[80px] sm:h-[120px] lg:h-[200px]" />
 
         <Stack gap="sm">
           <RichHeading
             segments={aboutHeadline}
             as="h2"
             surface="dark"
-            size="text-[28px] leading-[1.14] sm:text-[44px] lg:text-h1"
+            size="text-[24px] leading-[1.2] sm:text-[32px] md:text-[44px] lg:text-h1"
             weight={500}
             capitalize
             className="max-w-[1058px] text-center"

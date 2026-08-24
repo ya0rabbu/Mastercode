@@ -16,8 +16,8 @@ export default function FaqSection() {
         className="max-w-[900px]"
       />
 
-      <div className="flex w-full flex-col items-start gap-6 lg:flex-row">
-        <div className="relative h-[320px] w-full shrink-0 overflow-hidden rounded-frame md:h-[460px] lg:h-[613px] lg:w-[624px]">
+      <div className="flex w-full flex-col items-start gap-5 md:gap-6 lg:flex-row">
+        <div className="relative h-[260px] w-full shrink-0 overflow-hidden rounded-frame sm:h-[320px] md:h-[460px] lg:h-[613px] lg:w-[624px]">
           <Image
             src={faqVisual.src}
             alt={faqVisual.alt}

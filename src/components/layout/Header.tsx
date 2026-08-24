@@ -11,9 +11,9 @@ import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 
 const contactClass = cn(
-  "group flex shrink-0 items-center gap-[7.2px] font-body text-[18px]",
-  "font-semibold leading-none tracking-[0.48px] text-ink-soft",
-  "transition-colors duration-300 hover:text-cta sm:text-h5"
+  "group flex shrink-0 items-center gap-1.5 font-body text-[14px]",
+  "font-semibold leading-none tracking-[0.3px] text-ink-soft",
+  "transition-colors duration-300 hover:text-cta sm:text-[16px] sm:tracking-[0.4px] md:text-h5 md:tracking-[0.48px] md:gap-[7.2px]"
 );
 
 function Rule() {
@@ -41,7 +41,7 @@ export default function Header() {
         scrolled && "shadow-[0_1px_0_0_var(--color-hair)]"
       )}
     >
-      <Container className="flex items-center gap-2.5 py-5">
+      <Container className="flex items-center gap-2 py-4 sm:gap-2.5 sm:py-5">
         <MobileMenu />
         <Rule />
         <Logo />
