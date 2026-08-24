@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Odometer from "./Odometer";
+import CountUp from "./CountUp";
 import ScaleRule from "./ScaleRule";
 
 type Variant = "process" | "result";
@@ -50,7 +50,7 @@ export default function StatBlock({
       )}
 
       <div className="flex flex-col gap-3">
-        <Odometer
+        <CountUp
           value={value}
           className={cn(
             "font-body text-[48px] leading-none sm:text-[64px] lg:text-stat",
