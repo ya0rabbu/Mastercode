@@ -4,20 +4,31 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
+type Axis = "x" | "y";
+
+/** Base box + which scale property draws it. className can override the length. */
+const axes: Record<Axis, { base: string; prop: "scaleX" | "scaleY" }> = {
+  x: { base: "h-px w-full origin-left", prop: "scaleX" },
+  y: { base: "h-full w-px origin-top", prop: "scaleY" },
+};
+
 type ScaleRuleProps = {
   /** A bg-color utility, e.g. "bg-line-strong". */
   tone?: string;
+  axis?: Axis;
   delay?: number;
   className?: string;
 };
 
-/** Julian's `statistics-timeline`: a hairline that draws itself left to right. */
+/** Julian's `statistics-timeline`: a hairline that draws itself from its origin. */
 export default function ScaleRule({
   tone = "bg-line-strong",
+  axis = "x",
   delay = 0,
   className,
 }: ScaleRuleProps) {
   const ref = useRef<HTMLSpanElement>(null);
+  const { base, prop } = axes[axis];
 
   useGSAP(
     () => {
@@ -27,9 +38,9 @@ export default function ScaleRule({
 
       gsap.fromTo(
         el,
-        { scaleX: 0 },
+        { [prop]: 0 },
         {
-          scaleX: 1,
+          [prop]: 1,
           duration: 1.1,
           delay,
           ease: "power3.inOut",
@@ -37,14 +48,8 @@ export default function ScaleRule({
         }
       );
     },
-    { scope: ref, dependencies: [delay] }
+    { scope: ref, dependencies: [delay, prop] }
   );
 
-  return (
-    <span
-      ref={ref}
-      aria-hidden="true"
-      className={cn("block h-px w-full origin-left", tone, className)}
-    />
-  );
+  return <span ref={ref} aria-hidden="true" className={cn("block", base, tone, className)} />;
 }

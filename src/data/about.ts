@@ -19,6 +19,8 @@ export const about = {
     "It started with a simple idea — that good design shouldn't be noticed, " +
     "it should just work. That idea took Yasir across healthcare platforms " +
     "where confusion cost people care, fintech products where trust was " +
-    "everything, and SaaS tools people used every single day.",
+    "everything, and SaaS tools people used every single day. Different " +
+    "industries, same instinct: strip away the noise, keep what matters, " +
+    "ship something people actually enjoy using.",
   cta: { label: "Read more", href: "#projects" },
 };

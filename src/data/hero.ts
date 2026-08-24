@@ -1,5 +1,5 @@
 export const hero = {
-  eyebrow: "Hey , I am Yasir Abed Rabbu",
+  eyebrow: "Hey, I am Yasir Abed Rabbu",
   titleTop: "User-centric",
   titleRole: "Product",
   titleCraft: "Designer",
