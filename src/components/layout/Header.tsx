@@ -1,45 +1,48 @@
+"use client";
+
+import Link from "next/link";
+
 import Container from "@/components/ui/Container";
-import IconButton from "@/components/ui/IconButton";
+import RollingText from "@/components/ui/RollingText";
+import { navContact } from "@/data/nav";
+import { useScrolled } from "@/hooks/useScrolled";
+import { cn } from "@/lib/utils";
 import Logo from "./Logo";
+import MobileMenu from "./MobileMenu";
+
+const contactClass = cn(
+  "group flex shrink-0 items-center gap-[7.2px] font-body text-[18px]",
+  "font-semibold leading-none tracking-[0.48px] text-ink-soft",
+  "transition-colors duration-300 hover:text-cta sm:text-h5"
+);
 
 function Rule() {
   return <span aria-hidden="true" className="hidden h-px flex-1 bg-hair sm:block" />;
 }
 
-function MenuIcon() {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" className="size-8">
-      <path
-        d="M8 12h16M8 20h16"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 /** Figma renders it literally as { Contact } — braces are separate spans. */
 function ContactLink() {
   return (
-    <a
-      href="#contact"
-      className="flex shrink-0 items-center gap-[7.2px] font-body text-[18px] font-semibold leading-none tracking-[0.48px] text-ink-soft transition-colors hover:text-cta sm:text-h5"
-    >
+    <Link href={navContact.href} className={contactClass}>
       <span aria-hidden="true">&#123;</span>
-      <span>Contact</span>
+      <RollingText>{navContact.label}</RollingText>
       <span aria-hidden="true">&#125;</span>
-    </a>
+    </Link>
   );
 }
 
 export default function Header() {
+  const scrolled = useScrolled();
+
   return (
-    <header className="w-full bg-bg-white">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full bg-bg-white transition-shadow duration-500",
+        scrolled && "shadow-[0_1px_0_0_var(--color-hair)]"
+      )}
+    >
       <Container className="flex items-center gap-2.5 py-5">
-        <IconButton label="Open menu" size="md" variant="outline">
-          <MenuIcon />
-        </IconButton>
+        <MobileMenu />
         <Rule />
         <Logo />
         <Rule />
