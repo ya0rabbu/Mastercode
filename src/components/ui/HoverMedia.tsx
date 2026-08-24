@@ -14,12 +14,14 @@ type HoverMediaProps = {
   size?: "feature" | "thumb";
   scrim?: boolean;
   priority?: boolean;
-  /** A bg utility for the wipe, e.g. "bg-cta/80". */
+  /** WebGL cursor-ripple on the image (forwarded to MediaFrame). */
+  liquid?: boolean;
+  /** A bg utility for the wipe, e.g. "bg-cta/80". Omit to skip the wipe. */
   wipeTone?: string;
   className?: string;
 };
 
-/** MediaFrame plus Julian's project-card motion: cursor arrow + colour wipe. */
+/** MediaFrame plus Julian's project-card motion: cursor arrow + optional wipe. */
 export default function HoverMedia({
   wipeTone,
   className,
@@ -35,7 +37,7 @@ export default function HoverMedia({
       className={cn("group", className)}
       overlay={
         <>
-          <ColorWipe tone={wipeTone} />
+          {wipeTone && <ColorWipe tone={wipeTone} />}
           <CursorArrow ref={followerRef} />
         </>
       }

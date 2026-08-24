@@ -1,6 +1,7 @@
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
+import RuledAction from "@/components/ui/RuledAction";
 import ProjectFeature from "./ProjectFeature";
 import ProjectGrid from "./ProjectGrid";
 import { projectsCta, projectsHeader } from "@/data/projects";
@@ -22,9 +23,11 @@ export default function ProjectsSection() {
         <ProjectGrid />
       </div>
 
-      <Button href={projectsCta.href} variant="light">
-        {projectsCta.label}
-      </Button>
+      <RuledAction tone="dark">
+        <Button href={projectsCta.href} variant="light">
+          {projectsCta.label}
+        </Button>
+      </RuledAction>
     </Section>
   );
 }

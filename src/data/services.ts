@@ -22,8 +22,14 @@ export const services: Service[] = [
     summary: "End-to-end UI/UX for web & mobile",
     mockup: sharedMockup,
     description:
-      "I oversee the complete design process — from first sketch to " +
-      "shipped screen — so the product stays coherent at every step.",
+      "I oversee the complete design process, turning a blank canvas into " +
+      "a product ready for launch. This involves researching user needs, " +
+      "crafting wireframes, designing high-fidelity user interfaces, and " +
+      "building a scalable design system. My focus is on ensuring that " +
+      "every design decision aligns with both user requirements and " +
+      "business goals, creating a seamless experience that resonates with " +
+      "users and meets strategic objectives. Ultimately, I strive to " +
+      "innovate and elevate the UX at every stage.",
   },
   {
     title: "Design Systems",

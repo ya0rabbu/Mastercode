@@ -39,7 +39,7 @@ export default function Button({
   const { pill, ring } = variants[variant];
 
   const face = cn(
-    "relative z-10 inline-flex h-control items-center justify-center gap-2.5",
+    "relative z-10 inline-flex h-control items-center justify-center gap-8px",
     "rounded-pill px-8 font-ui text-label font-medium lg:px-10",
     pill
   );

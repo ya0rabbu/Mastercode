@@ -8,7 +8,7 @@ export default function ProjectFeature() {
   const { title, description, image, href } = featuredProject;
 
   return (
-    <HoverMedia src={image} alt={title} size="feature" wipeTone="bg-brand-hover/80">
+    <HoverMedia src={image} alt={title} size="feature" liquid>
       <ProjectCaption
         size="feature"
         action={

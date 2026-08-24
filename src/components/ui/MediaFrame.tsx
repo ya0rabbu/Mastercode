@@ -1,5 +1,6 @@
 import type { ReactNode, Ref } from "react";
 import Image from "next/image";
+import LiquidImage from "./LiquidImage";
 import { cn } from "@/lib/utils";
 
 type Size = "feature" | "thumb";
@@ -27,6 +28,8 @@ type MediaFrameProps = {
   /** Subtle dark scrim so light imagery doesn't swallow the caption. */
   scrim?: boolean;
   priority?: boolean;
+  /** Swap the still image for a WebGL cursor-ripple (falls back gracefully). */
+  liquid?: boolean;
   ref?: Ref<HTMLDivElement>;
   className?: string;
 };
@@ -39,6 +42,7 @@ export default function MediaFrame({
   size = "thumb",
   scrim = false,
   priority = false,
+  liquid = false,
   ref,
   className,
 }: MediaFrameProps) {
@@ -54,14 +58,11 @@ export default function MediaFrame({
         className
       )}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes={spec.sizes}
-        priority={priority}
-        className="object-cover"
-      />
+      {liquid ? (
+        <LiquidImage src={src} alt={alt} sizes={spec.sizes} priority={priority} />
+      ) : (
+        <Image src={src} alt={alt} fill sizes={spec.sizes} priority={priority} className="object-cover" />
+      )}
 
       {scrim && (
         <span

@@ -22,6 +22,7 @@ export default function ProjectThumbnail({
       alt={title}
       size="thumb"
       scrim={scrim}
+      liquid
       className={className}
     >
       <ProjectCaption
