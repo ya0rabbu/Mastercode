@@ -3,7 +3,6 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
 import RuledAction from "@/components/ui/RuledAction";
 import ProjectFeature from "./ProjectFeature";
-import ProjectGrid from "./ProjectGrid";
 import { projectsCta, projectsHeader } from "@/data/projects";
 
 export default function ProjectsSection() {
@@ -18,9 +17,8 @@ export default function ProjectsSection() {
         className="max-w-[780px]"
       />
 
-      <div className="flex w-full flex-col gap-6">
+      <div className="w-full">
         <ProjectFeature />
-        <ProjectGrid />
       </div>
 
       <RuledAction tone="dark">

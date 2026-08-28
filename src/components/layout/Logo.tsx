@@ -1,21 +1,30 @@
 import Link from "next/link";
-
-import AssetIcon from "@/components/ui/AssetIcon";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/**
- * /icons/logo.svg already holds the full lockup — the two offset bars plus the
- * wordmark — at 223x24, so it is masked once and tinted per surface. The text
- * stays in the DOM for screen readers and search. Figma sizes the wordmark at
- * 24px on every breakpoint, so the lockup renders at its native 223x24.
- */
 export default function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("shrink-0 text-brand-active", className)}>
+    <Link href="/" className={cn("shrink-0", className)}>
       <span className="sr-only">Yasir Abed Rabbu</span>
-      <AssetIcon
+
+      {/* Mobile: < sm — 192×28 */}
+      <Image
         src="/icons/logo.svg"
-        className="xl:h-5 w-[186px] sm:h-6 sm:w-[223px]"
+        alt="Yasir Abed Rabbu"
+        width={192}
+        height={28}
+        className="block h-7 w-[192px] sm:hidden"
+        priority
+      />
+
+      {/* Desktop: sm+ — 254×36 */}
+      <Image
+        src="/icons/logo.svg"
+        alt="Yasir Abed Rabbu"
+        width={254}
+        height={36}
+        className="hidden h-9 w-[254px] sm:block"
+        priority
       />
     </Link>
   );

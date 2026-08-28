@@ -14,7 +14,7 @@ export const hero = {
   portrait: {
     src: "/images/hero-portrait.png",
     alt: "Yasir Abed Rabbu",
-    width: 600,
-    height: 630,
+    width: 756,
+    height: 792,
   },
 } as const;

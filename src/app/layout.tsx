@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
+import SideNav from "@/components/layout/SideNav";
+import SmoothScroll from "@/components/layout/SmoothScroll";
+import Footer from "@/components/layout/Footer";
+import Preloader from "@/components/layout/Preloader";
 
 const title = "Yasir Abed Rabbu — User-centric Product Designer";
 const description =
@@ -13,13 +16,14 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={fontVariables}>
-      <body className="bg-bg-white font-body text-ink antialiased">
-        {children}
+    <html>
+      <body>
+        <Preloader />
+        <SideNav />
+        <SmoothScroll>{children}</SmoothScroll>
+        <Footer />
       </body>
     </html>
   );
