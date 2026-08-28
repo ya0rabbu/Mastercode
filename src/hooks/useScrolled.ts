@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-/** True once the page is past `offset` — drives the header's glass blur. */
+/** True once the page is scrolled past `offset`. Consumers use this to
+ *  switch the header into its glass/scrolled state (blur + shadow). */
 export function useScrolled(offset = 24) {
   const [scrolled, setScrolled] = useState(false);
 

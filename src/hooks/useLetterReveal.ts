@@ -4,13 +4,11 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 type LetterRevealOptions = {
-  /** Travel distance as a percentage of each glyph's own height. */
   y?: number;
   stagger?: number;
   start?: string;
 };
 
-/** Staggers every [data-letter] inside the ref once it scrolls into view. */
 export function useLetterReveal<T extends HTMLElement = HTMLDivElement>({
   y = 110,
   stagger = 0.03,
@@ -20,12 +18,18 @@ export function useLetterReveal<T extends HTMLElement = HTMLDivElement>({
 
   useGSAP(
     () => {
-      const letters = gsap.utils.toArray<HTMLElement>(
-        "[data-letter]",
-        ref.current
-      );
+      const root = ref.current;
+      if (!root) return;
+
+      const letters = gsap.utils.toArray<HTMLElement>("[data-letter]", root);
       if (!letters.length) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      root.classList.add("reveal-hidden");
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.classList.remove("reveal-hidden");
+        return;
+      }
 
       gsap.from(letters, {
         opacity: 0,
@@ -33,7 +37,8 @@ export function useLetterReveal<T extends HTMLElement = HTMLDivElement>({
         duration: 0.9,
         ease: "power3.out",
         stagger,
-        scrollTrigger: { trigger: ref.current, start, once: true },
+        scrollTrigger: { trigger: root, start, once: true },
+        onStart: () => root.classList.remove("reveal-hidden"),
       });
     },
     { scope: ref, dependencies: [y, stagger, start] }

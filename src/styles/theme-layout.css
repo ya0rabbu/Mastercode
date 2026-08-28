@@ -5,26 +5,25 @@
   --container-shell: 1320px;
 
   /* ---- Rhythm ---- */
-  --spacing-gutter: 300px;      /* reference only — see note below */
-  --spacing-section: 100px;     /* py on most sections            */
-  --spacing-section-sm: 80px;   /* py on service content block    */
-  --spacing-block: 48px;        /* gap between blocks in section  */
-  --spacing-cta-gap: 132px;     /* CTA button -> social logo row  */
+  --spacing-section: 100px;
+  --spacing-section-sm: 80px;
+  --spacing-block: 48px;
+  --spacing-cta-gap: 132px;
 
   /* ---- Radii ---- */
-  --radius-card: 12px;          /* service rows, caption blocks   */
-  --radius-frame: 16px;         /* project images, thumbnails     */
-  --radius-pill: 32px;          /* standard buttons               */
-  --radius-cta: 132px;          /* giant "Start a Project"        */
-  --radius-oval: 130px;         /* hero inline avatar             */
-  --radius-avatar: 99px;        /* CTA circular portrait          */
+  --radius-card: 12px;
+  --radius-frame: 16px;
+  --radius-pill: 32px;
+  --radius-cta: 132px;
+  --radius-oval: 130px;
+  --radius-avatar: 99px;
 
   /* ---- Fixed heights lifted from Figma ---- */
-  --spacing-control: 56px;      /* pill button height             */
-  --spacing-thumb: 324px;       /* project thumbnail              */
-  --spacing-stat-card: 368px;   /* process stat column            */
-  --spacing-mockup: 432px;      /* service mockup                 */
-  --spacing-feature: 760px;     /* hero project image             */
-  --spacing-social: 330px;      /* footer social logo box         */
-  --spacing-cta-block: 300px;   /* CTA button wrapper             */
+  --spacing-control: 56px;
+  --spacing-thumb: 324px;
+  --spacing-stat-card: 368px;
+  --spacing-mockup: 432px;
+  --spacing-feature: 760px;
+  --spacing-social: 330px;
+  --spacing-cta-block: 300px;
 }

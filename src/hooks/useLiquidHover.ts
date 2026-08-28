@@ -17,6 +17,8 @@ export function useLiquidHover(src: string) {
       if (window.matchMedia("(pointer: coarse)").matches) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+      let cancelled = false; // guards the async texture callback below
+
       let renderer: THREE.WebGLRenderer;
       try {
         renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
@@ -45,6 +47,12 @@ export function useLiquidHover(src: string) {
       };
 
       new THREE.TextureLoader().load(src, (tex) => {
+        if (cancelled) {
+          // Effect already tore down (scrolled away / unmounted) before the
+          // network resolved — don't touch disposed uniforms or a detached node.
+          tex.dispose();
+          return;
+        }
         tex.colorSpace = THREE.SRGBColorSpace;
         tex.minFilter = THREE.LinearFilter;
         uniforms.uTexture.value = tex;
@@ -84,6 +92,7 @@ export function useLiquidHover(src: string) {
       ro.observe(container);
 
       return () => {
+        cancelled = true;
         gsap.ticker.remove(render);
         ro.disconnect();
         container.removeEventListener("pointerenter", enter);

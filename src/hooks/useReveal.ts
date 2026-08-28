@@ -7,13 +7,10 @@ type RevealOptions = {
   y?: number;
   delay?: number;
   stagger?: number;
-  /** CSS selector, relative to the ref. Omit to animate the ref itself. */
   target?: string;
-  /** Julian's `heading-block` reveals with filter: blur(10px) -> blur(0). */
   blur?: number;
 };
 
-/** querySelectorAll rejects a bare "> *", so rewrite it to ":scope > *". */
 function scoped(target: string) {
   const trimmed = target.trim();
   return /^[>+~]/.test(trimmed) ? `:scope ${trimmed}` : trimmed;
@@ -32,12 +29,22 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>({
     () => {
       const root = ref.current;
       if (!root) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      // Pre-hide so nothing flashes at full opacity before GSAP takes over.
+      root.classList.add("reveal-hidden");
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.classList.remove("reveal-hidden");
+        return;
+      }
 
       const nodes = target
         ? gsap.utils.toArray<HTMLElement>(scoped(target), root)
         : [root];
-      if (!nodes.length) return;
+      if (!nodes.length) {
+        root.classList.remove("reveal-hidden");
+        return;
+      }
 
       gsap.from(nodes, {
         opacity: 0,
@@ -48,6 +55,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>({
         ease: "power3.out",
         stagger: target ? stagger : 0,
         scrollTrigger: { trigger: root, start: "top 85%", once: true },
+        onStart: () => root.classList.remove("reveal-hidden"),
       });
     },
     { scope: ref, dependencies: [y, delay, stagger, target, blur] }

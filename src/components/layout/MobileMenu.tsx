@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 import MenuButton from "./MenuButton";
 import MenuOverlay from "./MenuOverlay";
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const menuId = useId();
 
   useEffect(() => {
     if (!open) return;
@@ -26,8 +27,8 @@ export default function MobileMenu() {
 
   return (
     <>
-      <MenuButton open={open} onToggle={() => setOpen((value) => !value)} />
-      <MenuOverlay open={open} onNavigate={() => setOpen(false)} />
+      <MenuButton open={open} onToggle={() => setOpen((value) => !value)} menuId={menuId} />
+      <MenuOverlay open={open} onNavigate={() => setOpen(false)} menuId={menuId} />
     </>
   );
 }

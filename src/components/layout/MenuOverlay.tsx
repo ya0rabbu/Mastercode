@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 type MenuOverlayProps = {
   open: boolean;
   onNavigate: () => void;
+  menuId: string;
 };
 
 const items = [...navLinks, navContact];
@@ -26,7 +27,7 @@ const panelClass = cn(
   "bg-bg-white/70 backdrop-blur-2xl"
 );
 
-export default function MenuOverlay({ open, onNavigate }: MenuOverlayProps) {
+export default function MenuOverlay({ open, onNavigate, menuId }: MenuOverlayProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -43,7 +44,12 @@ export default function MenuOverlay({ open, onNavigate }: MenuOverlayProps) {
   );
 
   return (
-    <div ref={ref} aria-hidden={!open} className={cn(panelClass, !open && "pointer-events-none")}>
+    <div
+      ref={ref}
+      id={menuId}
+      aria-hidden={!open}
+      className={cn(panelClass, !open && "pointer-events-none")}
+    >
       <Container as="nav" className="flex flex-col gap-1">
         {items.map((link) => (
           <Link key={link.href} href={link.href} onClick={onNavigate} data-menu-item className={itemClass}>

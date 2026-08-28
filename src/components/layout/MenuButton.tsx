@@ -6,11 +6,10 @@ import { cn } from "@/lib/utils";
 type MenuButtonProps = {
   open: boolean;
   onToggle: () => void;
+  menuId: string;
 };
 
-/** Both glyphs already exist: menu.svg for closed, plus.svg turned 45deg for
- *  the close cross. 36px box on phones (export), 48px from sm up. */
-export default function MenuButton({ open, onToggle }: MenuButtonProps) {
+export default function MenuButton({ open, onToggle, menuId }: MenuButtonProps) {
   const layer =
     "absolute inset-0 m-auto size-5 transition-all duration-1000 ease-spring sm:size-8";
 
@@ -19,6 +18,7 @@ export default function MenuButton({ open, onToggle }: MenuButtonProps) {
       type="button"
       aria-label={open ? "Close menu" : "Open menu"}
       aria-expanded={open}
+      aria-controls={menuId}
       onClick={onToggle}
       className={cn(
         "relative z-50 size-9 shrink-0 rounded-card border border-line-strong sm:size-12",

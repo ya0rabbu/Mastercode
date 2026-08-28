@@ -16,7 +16,6 @@ const contactClass = cn(
   "transition-colors duration-300 hover:text-cta sm:flex sm:text-[16px] sm:tracking-[0.4px] md:text-h5 md:tracking-[0.48px] md:gap-[7.2px]"
 );
 
-/** Figma renders it literally as { Contact } — braces are separate spans. */
 function ContactLink() {
   return (
     <Link href={navContact.href} className={contactClass}>
@@ -33,11 +32,12 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full bg-bg-white transition-shadow duration-500",
-        scrolled && "shadow-[0_1px_0_0_var(--color-hair)]"
+        "sticky top-0 z-50 w-full transition-[background-color,backdrop-filter,box-shadow] duration-500",
+        scrolled
+          ? "bg-bg-white/70 shadow-[0_1px_0_0_var(--color-hair)] backdrop-blur-xl"
+          : "bg-bg-white backdrop-blur-none"
       )}
     >
-      {/* Mobile: [menu]—[logo]. sm+: [menu]—[logo]—[contact] with hairline rules. */}
       <Container className="flex items-center gap-2.5 py-5">
         <MobileMenu />
         <span aria-hidden="true" className="h-px flex-1 bg-hair" />

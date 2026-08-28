@@ -1,3 +1,4 @@
+// lib/fonts.ts
 import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -13,6 +14,9 @@ export const cabinet = localFont({
   weight: "100 800",
   variable: "--font-cabinet",
   display: "swap",
+  // Closer x-height/width match than default system-ui reduces the
+  // visible reflow when Cabinet swaps in on the 92px hero title.
+  fallback: ["Georgia", "serif"],
 });
 
 export const satoshi = localFont({
@@ -20,9 +24,9 @@ export const satoshi = localFont({
   weight: "300 900",
   variable: "--font-satoshi",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
-/** Spread onto <html> so all three CSS variables are available globally. */
 export const fontVariables = [
   manrope.variable,
   cabinet.variable,
