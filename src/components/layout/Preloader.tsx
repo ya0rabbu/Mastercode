@@ -6,15 +6,15 @@ import { gsap } from "@/lib/gsap";
 export default function Preloader() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const zoomRef = useRef<HTMLDivElement>(null);
+  const zoomLetterRef = useRef<HTMLSpanElement>(null);
   const scrollRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const overlay = overlayRef.current;
     const text = textRef.current;
-    const zoom = zoomRef.current;
+    const zoomLetter = zoomLetterRef.current;
     const scroll = scrollRef.current;
-    if (!overlay || !text || !zoom || !scroll) return;
+    if (!overlay || !text || !zoomLetter || !scroll) return;
 
     document.body.style.overflow = "hidden";
 
@@ -28,38 +28,38 @@ export default function Preloader() {
     });
 
     tl
-      // letters slide up
+      // letters slide up from bottom
       .fromTo(
         chars,
-        { yPercent: 110 },
+        { yPercent: 120 },
         {
           yPercent: 0,
-          duration: 0.9,
+          duration: 1,
           ease: "power3.out",
-          stagger: 0.035,
+          stagger: 0.04,
         }
       )
       // scroll hint
       .fromTo(
         scroll,
-        { opacity: 0, y: 8 },
+        { opacity: 0, y: 10 },
         { opacity: 1, y: 0, duration: 0.4 },
-        "-=0.2"
+        "-=0.3"
       )
       // pause
-      .to({}, { duration: 0.7 })
-      // text + scroll fade out
-      .to([text, scroll], { opacity: 0, duration: 0.35 })
-      // zoom element fade in
-      .set(zoom, { opacity: 1 })
-      // zoom in — screen ভরে যায়
-      .fromTo(
-        zoom,
-        { scale: 1 },
-        { scale: 50, duration: 0.9, ease: "power3.in" }
-      )
-      // overlay fade out
-      .to(overlay, { opacity: 0, duration: 0.2 }, "-=0.15");
+      .to({}, { duration: 0.8 })
+      // text fade out
+      .to(text, { opacity: 0, duration: 0.3 })
+      .to(scroll, { opacity: 0, duration: 0.3 }, "<")
+      // "Y" zoom — screen ভরে যায়
+      .set(zoomLetter, { opacity: 1, scale: 1 })
+      .to(zoomLetter, {
+        scale: 80,
+        duration: 1,
+        ease: "power3.in",
+      })
+      // overlay fade
+      .to(overlay, { opacity: 0, duration: 0.25 }, "-=0.2");
   }, []);
 
   const name = "Yasir Abed Rabbu";
@@ -67,23 +67,26 @@ export default function Preloader() {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-bg-deep overflow-hidden"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-bg-deep"
     >
-      {/* name */}
-      <div ref={textRef} className="flex">
+      {/* name — each letter wrapped in overflow:hidden */}
+      <div ref={textRef} className="flex items-end">
         {[...name].map((char, i) =>
           char === " " ? (
-            <span key={i} className="inline-block w-[0.28em]" />
+            <span key={i} style={{ display: "inline-block", width: "0.28em" }} />
           ) : (
             <span
               key={i}
-              className="inline-block overflow-hidden"
-              style={{ lineHeight: 1 }}
+              style={{ display: "inline-block", overflow: "hidden", lineHeight: 1.1 }}
             >
               <span
                 data-char
-                className="inline-block font-display text-[48px] font-medium text-on-brand sm:text-[64px] lg:text-[86px]"
-                style={{ lineHeight: 1 }}
+                className="font-display font-medium text-on-brand"
+                style={{
+                  display: "inline-block",
+                  fontSize: "clamp(36px, 6vw, 86px)",
+                  lineHeight: 1.1,
+                }}
               >
                 {char}
               </span>
@@ -92,29 +95,24 @@ export default function Preloader() {
         )}
       </div>
 
-      {/* zoom — "Y" */}
-      <div
-        ref={zoomRef}
-        className="pointer-events-none absolute"
-        style={{ opacity: 0 }}
+      {/* zoom letter "Y" — absolutely centered */}
+      <span
+        ref={zoomLetterRef}
+        className="pointer-events-none absolute font-display font-bold text-on-brand"
+        style={{
+          fontSize: "clamp(36px, 6vw, 86px)",
+          lineHeight: 1,
+          opacity: 0,
+          transformOrigin: "center center",
+        }}
       >
-        <span
-          className="font-display text-[86px] font-bold text-bg-deep"
-          style={{
-            lineHeight: 1,
-            display: "block",
-            width: "1em",
-            height: "1em",
-            borderRadius: "50%",
-            background: "var(--color-on-brand)",
-          }}
-        />
-      </div>
+        Y
+      </span>
 
       {/* scroll */}
       <p
         ref={scrollRef}
-        className="absolute bottom-10 font-ui text-[11px] tracking-[0.25em] text-ink-muted uppercase"
+        className="absolute bottom-10 font-ui text-[11px] uppercase tracking-[0.25em] text-ink-muted"
         style={{ opacity: 0 }}
       >
         Scroll
