@@ -100,6 +100,9 @@ export default function Preloader() {
         ref={zoomLetterRef}
         className="pointer-events-none absolute font-display font-bold text-on-brand"
         style={{
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
           fontSize: "clamp(36px, 6vw, 86px)",
           lineHeight: 1,
           opacity: 0,
