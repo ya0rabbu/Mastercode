@@ -11,14 +11,10 @@ import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 
 const contactClass = cn(
-  "group flex shrink-0 items-center gap-1.5 font-body text-[14px]",
+  "group hidden shrink-0 items-center gap-1.5 font-body text-[14px]",
   "font-semibold leading-none tracking-[0.3px] text-ink-soft",
-  "transition-colors duration-300 hover:text-cta sm:text-[16px] sm:tracking-[0.4px] md:text-h5 md:tracking-[0.48px] md:gap-[7.2px]"
+  "transition-colors duration-300 hover:text-cta sm:flex sm:text-[16px] sm:tracking-[0.4px] md:text-h5 md:tracking-[0.48px] md:gap-[7.2px]"
 );
-
-function Rule() {
-  return <span aria-hidden="true" className="hidden h-px flex-1 bg-hair sm:block" />;
-}
 
 /** Figma renders it literally as { Contact } — braces are separate spans. */
 function ContactLink() {
@@ -41,11 +37,12 @@ export default function Header() {
         scrolled && "shadow-[0_1px_0_0_var(--color-hair)]"
       )}
     >
-      <Container className="flex items-center gap-2 py-4 sm:gap-2.5 sm:py-5">
+      {/* Mobile: [menu]—[logo]. sm+: [menu]—[logo]—[contact] with hairline rules. */}
+      <Container className="flex items-center gap-2.5 py-5">
         <MobileMenu />
-        <Rule />
+        <span aria-hidden="true" className="h-px flex-1 bg-hair" />
         <Logo />
-        <Rule />
+        <span aria-hidden="true" className="hidden h-px flex-1 bg-hair sm:block" />
         <ContactLink />
       </Container>
     </header>

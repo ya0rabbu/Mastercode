@@ -28,7 +28,7 @@ export default function CtaButton() {
         href={cta.action.href}
         className="group relative z-10 flex w-full items-center justify-center gap-4 rounded-[48px] bg-cta px-6 py-8 text-center transition-colors duration-300 hover:bg-cta-hover sm:gap-6 sm:rounded-[80px] sm:px-10 sm:py-12 md:py-16 lg:absolute lg:left-0 lg:top-[2px] lg:gap-12 lg:rounded-cta lg:px-[170px] lg:py-[84px]"
       >
-        <SplitLetters className="font-ui text-[22px] font-medium leading-tight text-on-cta sm:text-[32px] md:text-[48px] lg:text-cta-xl">
+        <SplitLetters className="font-ui text-[26px] font-medium leading-tight text-on-cta sm:text-[32px] md:text-[48px] lg:text-cta-xl">
           {cta.action.label}
         </SplitLetters>
 

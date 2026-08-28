@@ -1,3 +1,4 @@
+// src/components/ui/StatBlock.tsx  (SUPERSEDES the Process-batch version)
 import { cn } from "@/lib/utils";
 import CountUp from "./CountUp";
 import ScaleRule from "./ScaleRule";
@@ -28,8 +29,9 @@ export default function StatBlock({
     <div
       className={cn(
         "flex flex-1 flex-col",
+        // Process — mobile: 12px-gap left column; sm+ restores justify-between block.
         isProcess
-          ? "justify-between gap-6 px-5 pb-4 pt-5 sm:px-6 sm:gap-8 sm:pt-6 lg:h-stat-card"
+          ? "gap-3 px-5 pb-4 pt-5 sm:justify-between sm:gap-8 sm:px-6 sm:pt-6 lg:h-stat-card"
           : "gap-4 p-5 sm:p-6 lg:p-8",
         divider &&
           (isProcess
@@ -41,7 +43,9 @@ export default function StatBlock({
       {isProcess && (
         <div className="flex flex-col gap-3">
           {label && (
-            <p className="font-display text-h6 font-medium text-ink">{label}</p>
+            <p className="font-display text-[16px] font-medium text-ink lg:text-h6">
+              {label}
+            </p>
           )}
           <p className="font-body text-note font-light text-ink-soft">
             {description}
@@ -65,8 +69,9 @@ export default function StatBlock({
         />
       </div>
 
+      {/* Result caption — mobile 16px (Figma StyledStatdescription), was 18px. */}
       {!isProcess && (
-        <p className="font-body text-[18px] sm:text-h5 text-ink-faint">{description}</p>
+        <p className="font-body text-[16px] sm:text-h5 text-ink-faint">{description}</p>
       )}
     </div>
   );

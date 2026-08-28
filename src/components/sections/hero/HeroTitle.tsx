@@ -1,27 +1,27 @@
 import Image from "next/image";
 import { hero } from "@/data/hero";
 
-/** 92px display type — tuned for phones → tablets → desktop. */
+/** 92px display type — tuned for phones (48px) → tablets → desktop. */
 const displayType =
-  "font-display font-medium text-[32px] leading-[1] sm:text-[48px] md:text-[64px] lg:text-display";
+  "font-display font-medium text-[48px] leading-[1] sm:text-[56px] md:text-[64px] lg:text-display";
 
 export default function HeroTitle() {
   return (
     <div className="flex w-full flex-col items-center gap-3 sm:gap-4">
-      <p className="w-full font-body text-[13px] font-medium leading-4 text-ink sm:text-[16px]">
+      <p className="w-full font-body text-[16px] font-medium leading-4 text-ink">
         {hero.eyebrow}
       </p>
 
       <div className="flex w-full max-w-[514px] flex-col gap-3 sm:gap-4">
         <p className={`text-center text-ink ${displayType}`}>{hero.titleTop}</p>
 
-        <div className="flex items-stretch justify-center gap-2.5 sm:gap-4">
-          <div className="relative h-[72px] min-w-[72px] flex-1 overflow-hidden rounded-[56px] sm:h-[96px] sm:min-w-[96px] sm:rounded-[78px] lg:h-[154px] lg:min-w-[154px] lg:rounded-oval">
+        <div className="flex items-center justify-center gap-3 sm:items-stretch sm:gap-4">
+          <div className="relative h-[112px] w-[86px] shrink-0 overflow-hidden rounded-[73px] sm:h-[96px] sm:w-[96px] sm:rounded-[78px] lg:h-[154px] lg:w-[154px] lg:rounded-oval">
             <Image
               src={hero.avatar.src}
               alt={hero.avatar.alt}
               fill
-              sizes="(max-width: 640px) 72px, (max-width: 1024px) 96px, 154px"
+              sizes="(max-width: 640px) 86px, (max-width: 1024px) 96px, 154px"
               className="object-cover"
               priority
             />
@@ -34,7 +34,7 @@ export default function HeroTitle() {
         </div>
       </div>
 
-      <p className="w-full text-right font-body text-[14px] font-medium leading-none text-ink-soft sm:text-[18px] md:text-h5">
+      <p className="w-full text-right font-body text-[20px] font-medium leading-none text-ink-soft md:text-h5">
         {hero.location}
       </p>
     </div>

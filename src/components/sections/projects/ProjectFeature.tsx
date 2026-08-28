@@ -24,7 +24,8 @@ export default function ProjectFeature() {
           {title}
         </h3>
 
-        <Prose size="sm" tone="onBrand" className="font-medium">
+        {/* Figma hides the blurb on phones — the short featured frame shows title only. */}
+        <Prose size="sm" tone="onBrand" className="hidden font-medium md:block">
           {description}
         </Prose>
       </ProjectCaption>

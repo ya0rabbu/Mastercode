@@ -5,14 +5,15 @@ import { cn } from "@/lib/utils";
 
 type Size = "feature" | "thumb";
 
-/** Figma: feature = 760px tall / 20px pad, thumb = 324px tall / 16px pad. */
+/** Figma: feature = 760px tall / 20px pad, thumb = 324px tall / 16px pad.
+ *  On phones both scale by width — featured 1320:760, thumb 3:2. */
 const sizes: Record<Size, { frame: string; sizes: string }> = {
   feature: {
-    frame: "h-[380px] p-4 md:h-[560px] lg:h-feature lg:p-5",
+    frame: "aspect-[1320/760] p-5 md:aspect-auto md:h-[560px] lg:h-feature",
     sizes: "(max-width: 1024px) 100vw, 1320px",
   },
   thumb: {
-    frame: "h-[260px] p-3 md:h-[300px] lg:h-thumb lg:p-4",
+    frame: "aspect-[3/2] p-4 md:aspect-auto md:h-[300px] lg:h-thumb",
     sizes: "(max-width: 1024px) 100vw, 424px",
   },
 };

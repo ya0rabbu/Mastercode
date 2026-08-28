@@ -3,7 +3,7 @@ import { footer } from "@/data/site";
 export default function Footer() {
   return (
     <footer className="flex w-full flex-col items-center gap-3">
-      <div className="flex w-full flex-col items-center justify-between gap-3 text-center font-ui text-[13px] text-ink-soft sm:flex-row sm:text-left sm:text-label md:gap-6">
+      <div className="flex w-full flex-col items-center justify-between gap-3 text-center font-ui text-[14px] text-ink-soft sm:flex-row sm:text-left sm:text-label md:gap-6">
         <p>{footer.copyright}</p>
 
         <nav className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">

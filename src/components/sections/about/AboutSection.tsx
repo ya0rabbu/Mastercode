@@ -24,13 +24,19 @@ export default function AboutSection() {
             segments={aboutHeadline}
             as="h2"
             surface="dark"
-            size="text-[24px] leading-[1.2] sm:text-[32px] md:text-[44px] lg:text-h1"
+            size="text-[36px] leading-[1.14] md:text-[44px] lg:text-h1"
             weight={500}
             capitalize
             className="max-w-[1058px] text-center"
           />
 
-          <Prose tone="faint" size="sm" width="xl" align="center">
+          <Prose
+            tone="faint"
+            size="sm"
+            width="xl"
+            align="center"
+            className="text-[16px]! leading-[1.6]!"
+          >
             {about.body}
           </Prose>
         </Stack>

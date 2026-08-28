@@ -40,7 +40,7 @@ export default function Button({
 
   const face = cn(
     "relative z-10 inline-flex h-[48px] items-center justify-center gap-1",
-    "rounded-pill px-5 font-ui text-[14px] font-medium sm:h-control sm:px-8 sm:text-label lg:px-10 lg:gap-2",
+    "rounded-pill px-6 font-ui text-label font-medium sm:h-control sm:px-8 lg:px-10 lg:gap-2",
     pill
   );
 

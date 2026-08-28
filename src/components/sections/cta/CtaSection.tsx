@@ -12,8 +12,9 @@ export default function CtaSection() {
         <SectionHeader
           title={cta.title}
           subtitle={cta.subtitle}
-          size="h1Tight"
+          size="cta"
           subtitleWidth="lg"
+          subtitleClassName="text-[20px] leading-8"
           className="max-w-[560px]"
         />
         <CtaButton />

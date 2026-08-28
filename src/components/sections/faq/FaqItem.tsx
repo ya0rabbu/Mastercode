@@ -62,7 +62,8 @@ export default function FaqItem({ faq, open, onToggle }: FaqItemProps) {
       >
         <span
           className={cn(
-            "font-display text-[17px] leading-tight text-ink transition-colors duration-300 sm:text-[20px] md:text-[24px] lg:text-h4",
+            // Mobile 20px (Figma StyledQuestion), 24px at md, h4 at lg.
+            "font-display text-[20px] leading-tight text-ink transition-colors duration-300 md:text-[24px] lg:text-h4",
             open ? "font-bold" : "font-medium"
           )}
         >

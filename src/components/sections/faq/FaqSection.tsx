@@ -1,3 +1,4 @@
+// src/components/sections/faq/FaqSection.tsx
 import Image from "next/image";
 
 import Section from "@/components/ui/Section";
@@ -17,7 +18,8 @@ export default function FaqSection() {
       />
 
       <div className="flex w-full flex-col items-start gap-5 md:gap-6 lg:flex-row">
-        <div className="relative h-[260px] w-full shrink-0 overflow-hidden rounded-frame sm:h-[320px] md:h-[460px] lg:h-[613px] lg:w-[624px]">
+        {/* Mobile: full-width 335px-tall square (Figma StyledInfoImage), stacked above list. */}
+        <div className="relative h-[335px] w-full shrink-0 overflow-hidden rounded-frame sm:h-[320px] md:h-[460px] lg:h-[613px] lg:w-[624px]">
           <Image
             src={faqVisual.src}
             alt={faqVisual.alt}
