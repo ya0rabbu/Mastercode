@@ -17,14 +17,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html>
-      <body>
-        <Preloader />
-        <SideNav />
-        <SmoothScroll>{children}</SmoothScroll>
-        <Footer />
-      </body>
-    </html>
-  );
+return (
+  <html>
+    <body suppressHydrationWarning>
+      <Preloader />
+      <SideNav />
+      <SmoothScroll>{children}</SmoothScroll>
+    </body>
+  </html>
+);
 }
