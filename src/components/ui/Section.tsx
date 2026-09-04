@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import Container from "./Container";
 
 type Tone = "white" | "cream" | "deep";
@@ -36,6 +39,12 @@ type SectionProps = {
   bleed?: boolean;
   className?: string;
   innerClassName?: string;
+  /** ⬇️ Scroll-reveal controls. */
+  reveal?: boolean;
+  revealY?: number;
+  revealDelay?: number;
+  /** Viewport amount (0–1) that must be visible before reveal fires. */
+  revealAmount?: number;
 };
 
 export default function Section({
@@ -47,17 +56,43 @@ export default function Section({
   bleed = false,
   className,
   innerClassName,
+  reveal = true,
+  revealY = 48,
+  revealDelay = 0,
+  revealAmount = 0.18,
 }: SectionProps) {
-  const inner = (
-    <div
+  const motionInner = (
+    <motion.div
       className={cn(
         "flex w-full flex-col items-center",
         gaps[gap],
         innerClassName
       )}
+      initial={
+        reveal
+          ? { opacity: 0, y: revealY, scale: 0.985, filter: "blur(6px)" }
+          : false
+      }
+      whileInView={
+        reveal
+          ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+          : undefined
+      }
+      viewport={reveal ? { once: true, amount: revealAmount } : undefined}
+      transition={
+        reveal
+          ? {
+              duration: 0.9,
+              delay: revealDelay,
+              ease: [0.22, 1, 0.36, 1],
+              opacity: { duration: 0.6 },
+              filter: { duration: 0.75 },
+            }
+          : undefined
+      }
     >
       {children}
-    </div>
+    </motion.div>
   );
 
   return (
@@ -65,7 +100,7 @@ export default function Section({
       id={id}
       className={cn("relative w-full", tones[tone], spaces[space], className)}
     >
-      {bleed ? inner : <Container>{inner}</Container>}
+      {bleed ? motionInner : <Container>{motionInner}</Container>}
     </section>
   );
 }

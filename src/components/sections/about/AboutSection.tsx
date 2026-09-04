@@ -13,48 +13,99 @@ import { about, aboutHeadline } from "@/data/about";
 
 export default function AboutSection() {
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const proseRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const el = headingRef.current;
-      if (!el) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      // সব span গুলো নাও
-      const spans = el.querySelectorAll("span > span");
-      if (!spans.length) return;
+      // ── 1. Heading: split every character → overflow-hidden wrapper ──
+      const hEl = headingRef.current;
+      if (hEl) {
+        const spans = hEl.querySelectorAll("span > span");
+        spans.forEach((span) => {
+          const text = span.textContent || "";
+          span.textContent = "";
+          span.innerHTML = [...text]
+            .map((char) =>
+              char === " "
+                ? `<span style="display:inline-block;width:0.28em"> </span>`
+                : `<span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block" data-char>${char}</span></span>`
+            )
+            .join("");
+        });
+      }
 
-      // প্রতিটা span কে character এ ভাগ করো
-      spans.forEach((span) => {
-        const text = span.textContent || "";
-        span.textContent = "";
-        span.innerHTML = [...text]
-          .map((char) =>
-            char === " "
-              ? `<span style="display:inline-block;width:0.28em"> </span>`
-              : `<span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block" data-char>${char}</span></span>`
-          )
+      // ── 2. Prose: split body into WORDS (not chars — body is calmer) ──
+      const pEl = proseRef.current;
+      if (pEl) {
+        const raw = pEl.textContent || "";
+        pEl.textContent = "";
+        pEl.innerHTML = raw
+          .split(/(\s+)/)
+          .map((token) => {
+            if (/^\s+$/.test(token)) {
+              return `<span style="display:inline-block;width:0.28em"> </span>`;
+            }
+            return `<span style="display:inline-block;overflow:hidden;vertical-align:bottom;margin-right:0.12em"><span style="display:inline-block" data-word>${token}</span></span>`;
+          })
           .join("");
+      }
+
+      const chars = headingRef.current?.querySelectorAll("[data-char]") ?? [];
+      const words = proseRef.current?.querySelectorAll("[data-word]") ?? [];
+
+      // ════════════════════════════════════════════════════════════════
+      // SMOOTH SCROLL-SCRUB TEXT REVEAL
+      // ──────────────────────────────────────────────────────────────
+      // NOT a one-time tween. Character progress FOLLOWS your scroll:
+      //   • scroll slower → reveal slower
+      //   • scroll back up → text masks itself again (reversible!)
+      //   • scrub: 0.8 = 0.8s smooth easing lag behind the wheel
+      //
+      // Scrub window:
+      //   start = when heading-top crosses 90% of viewport bottom area
+      //   end   = when heading-top reaches 25% of viewport
+      //   → ~65vh of scrolling to fully reveal.
+      // ════════════════════════════════════════════════════════════════
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 92%",
+          end: "top 22%",
+          scrub: 0.8,
+        },
       });
 
-      const chars = el.querySelectorAll("[data-char]");
-
-      // slide up from bottom
-      gsap.fromTo(
+      // Phase 1 (0% → 72% of scroll): Headline chars slide + melt in.
+      // yPercent: from below mask → settled
+      // blur:     from soft → crisp (adds that "melt" premium feel)
+      tl.fromTo(
         chars,
-        { yPercent: 110, opacity: 0 },
+        { yPercent: 110, opacity: 0, filter: "blur(6px)" },
         {
           yPercent: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
+          filter: "blur(0px)",
+          stagger: 0.007,
+          ease: "none",
+        },
+        0
+      );
+
+      // Phase 2 (42% → 100% of scroll): BODY words trail the headline.
+      // Starts slightly behind so you read headline → then body.
+      tl.fromTo(
+        words,
+        { yPercent: 100, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
           stagger: 0.018,
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            once: true,
-          },
-        }
+          ease: "none",
+          duration: 0.6,
+        },
+        0.35
       );
     },
     { scope: headingRef }
@@ -66,6 +117,7 @@ export default function AboutSection() {
       tone="deep"
       gap="block"
       space="none"
+      reveal={false}
       className="pt-0 pb-12 md:pb-20 lg:pb-[100px]"
     >
       <Stack gap="md">
@@ -83,15 +135,19 @@ export default function AboutSection() {
             className="max-w-[1058px] text-center"
           />
 
-          <Prose
-            tone="faint"
-            size="sm"
-            width="xl"
-            align="center"
-            className="text-[16px]! leading-[1.6]!"
+          <div
+            ref={proseRef}
+            className={
+              // Exact equivalent of:
+              //   <Prose tone="faint" size="sm" width="xl" align="center" className="text-[16px]! leading-[1.6]!">
+              // — applied DIRECTLY because we overwrite this div's innerHTML.
+              // If we wrapped <Prose> inside here, textContent="" would delete Prose's
+              // element and drop all its styling (hence the centering bug).
+              "font-body text-body-sm sm:text-body-sm text-ink-faint max-w-[824px] text-center text-[16px]! leading-[1.6]!"
+            }
           >
             {about.body}
-          </Prose>
+          </div>
         </Stack>
       </Stack>
 

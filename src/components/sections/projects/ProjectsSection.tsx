@@ -7,7 +7,7 @@ import { projectsCta, projectsHeader } from "@/data/projects";
 
 export default function ProjectsSection() {
   return (
-    <Section id="projects" tone="deep" space="section" gap="block">
+    <Section id="projects" tone="deep" space="section" gap="block" reveal={false}>
       <SectionHeader
         title={projectsHeader.title}
         subtitle={projectsHeader.subtitle}
