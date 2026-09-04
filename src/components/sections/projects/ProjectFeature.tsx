@@ -68,12 +68,32 @@ function useCardTransforms(
     neverLeave ? 0 : -lv * LEAVE_Y_FACTOR * DECK_H_PX
   );
 
-  const y = useTransform<number>([slotY, leaveY], ([sy, ly]) => sy + ly);
-  const x = useTransform(leavePSpring, (lv) => (neverLeave ? 0 : -lv * LEAVE_X_FACTOR * CONTAINER_MAX_W));
-  const rotate = useTransform(leavePSpring, (lv) => (neverLeave ? 0 : -lv * LEAVE_ROTATE_DEG));
-  const scale = useTransform<number>([slotScale, leavePSpring], ([sc, lv]) => sc * (1 - lv * LEAVE_SCALE_SHRINK));
-  const opacity = useTransform<number>([slotOpacity, leavePSpring], ([op, lv]) => op * (1 - lv));
-  const filter = useTransform(leavePSpring, (lv) => (neverLeave ? "blur(0px)" : `blur(${lv * LEAVE_BLUR_PX}px)`));
+const y = useTransform(() => slotY.get() + leaveY.get());
+
+const x = useTransform(
+  leavePSpring,
+  (lv) =>
+    neverLeave ? 0 : -lv * LEAVE_X_FACTOR * CONTAINER_MAX_W
+);
+
+const rotate = useTransform(
+  leavePSpring,
+  (lv) => (neverLeave ? 0 : -lv * LEAVE_ROTATE_DEG)
+);
+
+const scale = useTransform(
+  () => slotScale.get() * (1 - leavePSpring.get() * LEAVE_SCALE_SHRINK)
+);
+
+const opacity = useTransform(
+  () => slotOpacity.get() * (1 - leavePSpring.get())
+);
+
+const filter = useTransform(
+  leavePSpring,
+  (lv) =>
+    neverLeave ? "blur(0px)" : `blur(${lv * LEAVE_BLUR_PX}px)`
+);
 
   const staticZ = n - cardIdx;
   const zIndex: MotionValue<number> | number = neverLeave
